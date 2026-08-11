@@ -97,11 +97,11 @@ export function ThemeToggle() {
   return (
     <button ref={button} className="theme-toggle" type="button" aria-label={`Switch to ${dark ? "light" : "dark"} mode`} aria-pressed={dark} onClick={toggle}>
       <svg className="theme-icon" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
-        <defs><clipPath id="theme-crescent"><path className="theme-crescent" d="M0 0h25a1 1 0 0 0 10 10v14H0Z" /></clipPath></defs>
-        <g stroke="currentColor" strokeLinecap="round">
-          <circle className="theme-core" cx="12" cy="12" r="5" fill="currentColor" clipPath="url(#theme-crescent)" />
+        <g className="theme-sun" stroke="currentColor" strokeLinecap="round">
+          <circle cx="12" cy="12" r="5" fill="currentColor" />
           {["M12 1.4v2.4", "m20.3 3.7-2.5 2.5", "M22.6 12h-2.4", "M12 22.6v-2.4", "M1.4 12h2.4", "m20.3 20.3-2.5-2.5", "m3.7 20.3 2.5-2.5", "m3.7 3.7 2.5 2.5"].map((path) => <path className="theme-ray" key={path} d={path} fill="none" strokeWidth="2" strokeLinejoin="round" />)}
         </g>
+        <path className="theme-moon" d="M20.3 15.2A8.2 8.2 0 0 1 8.8 3.7a8.7 8.7 0 1 0 11.5 11.5Z" fill="currentColor" />
       </svg>
     </button>
   );
@@ -112,7 +112,7 @@ export function HomePill({ onReturn, overlay = false }: { onReturn?: () => void;
     <a
       className={`home-pill ${overlay ? "project-overlay-home" : ""}`}
       href="/"
-      aria-label="Return home"
+      aria-label={overlay ? "Return to homepage" : "Return home"}
       onClick={(event) => {
         if (!onReturn) return;
         event.preventDefault();
@@ -121,10 +121,12 @@ export function HomePill({ onReturn, overlay = false }: { onReturn?: () => void;
       onPointerEnter={(event) => event.pointerType === "mouse" && haptic("rigid", 0.5)}
       onPointerDown={(event) => haptic("medium", 0.5, event.pointerType !== "mouse")}
     >
-      <svg className="home-pill-icon" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
-        <path fillRule="evenodd" clipRule="evenodd" d="M2.52 7.823C2 8.77 2 9.915 2 12.203V13.725C2 17.625 2 19.576 3.172 20.788C4.344 22 6.229 22 10 22H14C17.771 22 19.657 22 20.828 20.788C21.999 19.576 22 17.626 22 13.725V12.204C22 9.915 22 8.771 21.48 7.823C20.962 6.874 20.013 6.286 18.116 5.108L16.116 3.867C14.111 2.622 13.108 2 12 2C10.892 2 9.89 2.622 7.884 3.867L5.884 5.108C3.987 6.286 3.039 6.874 2.52 7.823ZM9 17.25C8.80109 17.25 8.61032 17.329 8.46967 17.4697C8.32902 17.6103 8.25 17.8011 8.25 18C8.25 18.1989 8.32902 18.3897 8.46967 18.5303C8.61032 18.671 8.80109 18.75 9 18.75H15C15.1989 18.75 15.3897 18.671 15.5303 18.5303C15.671 18.3897 15.75 18.1989 15.75 18C15.75 17.8011 15.671 17.6103 15.5303 17.4697C15.3897 17.329 15.1989 17.25 15 17.25H9Z" />
+      <svg className={`home-pill-icon ${overlay ? "home-pill-icon-return" : ""}`} width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+        {overlay
+          ? <path d="m9 6-6 6 6 6M4 12h9a7 7 0 0 1 7 7" />
+          : <path fillRule="evenodd" clipRule="evenodd" d="M2.52 7.823C2 8.77 2 9.915 2 12.203V13.725C2 17.625 2 19.576 3.172 20.788C4.344 22 6.229 22 10 22H14C17.771 22 19.657 22 20.828 20.788C21.999 19.576 22 17.626 22 13.725V12.204C22 9.915 22 8.771 21.48 7.823C20.962 6.874 20.013 6.286 18.116 5.108L16.116 3.867C14.111 2.622 13.108 2 12 2C10.892 2 9.89 2.622 7.884 3.867L5.884 5.108C3.987 6.286 3.039 6.874 2.52 7.823ZM9 17.25C8.80109 17.25 8.61032 17.329 8.46967 17.4697C8.32902 17.6103 8.25 17.8011 8.25 18C8.25 18.1989 8.32902 18.3897 8.46967 18.5303C8.61032 18.671 8.80109 18.75 9 18.75H15C15.1989 18.75 15.3897 18.671 15.5303 18.5303C15.671 18.3897 15.75 18.1989 15.75 18C15.75 17.8011 15.671 17.6103 15.5303 17.4697C15.3897 17.329 15.1989 17.25 15 17.25H9Z" />}
       </svg>
-      <span className="home-pill-desktop">Home</span>
+      <span className="home-pill-desktop">{overlay ? "Return" : "Home"}</span>
     </a>
   );
 }

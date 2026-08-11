@@ -1,6 +1,6 @@
 "use client";
 
-import { PointerEvent as ReactPointerEvent, useCallback, useEffect, useRef, useState } from "react";
+import { type CSSProperties, PointerEvent as ReactPointerEvent, useCallback, useEffect, useRef, useState } from "react";
 import { bottomImages, caseStudies, headshot, projects, snippets } from "./site-data";
 import { TimeFooter } from "./SiteChrome";
 import { dragHaptic, haptic } from "./haptics";
@@ -128,6 +128,7 @@ export function HomePage() {
   const [activeProject, setActiveProject] = useState<number | null>(null);
   const [openStudy, setOpenStudy] = useState<string | null>(null);
   const [soonCursor, setSoonCursor] = useState({ x: 0, y: 0, visible: false });
+  const [playgroundScale, setPlaygroundScale] = useState(1);
 
   const closeProject = useCallback(() => {
     setOpenStudy(null);
@@ -143,6 +144,16 @@ export function HomePage() {
     const closeOnBack = () => setOpenStudy(null);
     window.addEventListener("popstate", closeOnBack);
     return () => window.removeEventListener("popstate", closeOnBack);
+  }, []);
+
+  useEffect(() => {
+    const updateScale = () => setPlaygroundScale(Math.min(1, Math.max(0.4, (window.innerWidth - 24) / 640)));
+    const frame = window.requestAnimationFrame(updateScale);
+    window.addEventListener("resize", updateScale);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("resize", updateScale);
+    };
   }, []);
 
   useEffect(() => {
@@ -188,10 +199,11 @@ export function HomePage() {
       }
       event.preventDefault();
       const bounds = surface.getBoundingClientRect();
+      const scale = bounds.width / surface.offsetWidth || 1;
       deltaX = Math.max(bounds.left + 24 - startRect.right, Math.min(bounds.right - 24 - startRect.left, deltaX));
       deltaY = Math.max(bounds.top + 24 - startRect.bottom, Math.min(bounds.bottom - 24 - startRect.top, deltaY));
-      object.style.setProperty("--drag-x", `${baseX + deltaX}px`);
-      object.style.setProperty("--drag-y", `${baseY + deltaY}px`);
+      object.style.setProperty("--drag-x", `${baseX + deltaX / scale}px`);
+      object.style.setProperty("--drag-y", `${baseY + deltaY / scale}px`);
     };
 
     const pointerUp = (event: PointerEvent) => {
@@ -412,8 +424,7 @@ export function HomePage() {
         <h1 id="intro-title">Elliott Wilkie-Roşca</h1>
         <p>
           Designer with 12+ years of experience making products <em className="feel-word">feel</em> simple. I've helped startups and global brands simplify complex products across healthcare, AI, e-commerce, and emerging technology.
-          <span className="desktop-bio"> Currently, I'm an associate director of experience design at Boldscience.</span>
-          <span className="mobile-bio">Currently, I'm an associate director of experience design at Boldscience. Off the clock, running, gaming, spooky films, and music.</span>
+          <span> Currently, I'm an associate director of experience design at Boldscience.</span>
         </p>
       </section>
 
@@ -496,19 +507,21 @@ export function HomePage() {
       </section>
 
       <div className="home-playground-column home-reveal reveal-playground">
-        <section className="playground" ref={playground} aria-label="Personal objects">
-          <div className="collage-object drag-music"><RecentlyPlayed /></div>
-          <div className="collage-object drag-drawing"><img src={bottomImages.drawing} alt="" draggable={false} /></div>
-          <div className="collage-object drag-main-photo"><div className="photo-stack"><img src={bottomImages.desk} alt="Personal photo" draggable={false} /></div></div>
-          <div className="collage-object drag-friends"><img src={bottomImages.friends} alt="Friends at a celebration" draggable={false} /></div>
-          <div className="collage-object drag-figma"><img src={bottomImages.figma} alt="Figma" draggable={false} /></div>
-          <div className="collage-object drag-spark"><img src={bottomImages.spark} alt="" draggable={false} /></div>
-          <div className="collage-object drag-devils"><img src={bottomImages.devils} alt="Cardiff Devils" draggable={false} /></div>
-          <HalloweenHover />
-          <div className="collage-object drag-run"><img src={bottomImages.run} alt="Running route" draggable={false} /></div>
-          <div className="collage-object drag-wallpaper">
-            <img src={bottomImages.wallpaper} alt="Phone wallpaper" draggable={false} />
-            <span>my phone wallpaper<br />since '22</span>
+        <section className="playground-shell" style={{ "--playground-scale": playgroundScale, height: `${500 * playgroundScale}px` } as CSSProperties} aria-label="Personal objects">
+          <div className="playground" ref={playground}>
+            <div className="collage-object drag-music"><RecentlyPlayed /></div>
+            <div className="collage-object drag-drawing"><img src={bottomImages.drawing} alt="" draggable={false} /></div>
+            <div className="collage-object drag-main-photo"><div className="photo-stack"><img src={bottomImages.desk} alt="Personal photo" draggable={false} /></div></div>
+            <div className="collage-object drag-friends"><img src={bottomImages.friends} alt="Friends at a celebration" draggable={false} /></div>
+            <div className="collage-object drag-figma"><img src={bottomImages.figma} alt="Figma" draggable={false} /></div>
+            <div className="collage-object drag-spark"><img src={bottomImages.spark} alt="" draggable={false} /></div>
+            <div className="collage-object drag-devils"><img src={bottomImages.devils} alt="Cardiff Devils" draggable={false} /></div>
+            <HalloweenHover />
+            <div className="collage-object drag-run"><img src={bottomImages.run} alt="Running route" draggable={false} /></div>
+            <div className="collage-object drag-wallpaper">
+              <img src={bottomImages.wallpaper} alt="Phone wallpaper" draggable={false} />
+              <span>my phone wallpaper<br />since '22</span>
+            </div>
           </div>
         </section>
         <TimeFooter />
