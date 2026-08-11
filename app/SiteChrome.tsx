@@ -109,24 +109,25 @@ export function ThemeToggle() {
 
 export function HomePill({ onReturn, overlay = false }: { onReturn?: () => void; overlay?: boolean } = {}) {
   return (
-    <a
-      className={`home-pill ${overlay ? "project-overlay-home" : ""}`}
-      href="/"
-      aria-label={overlay ? "Return to homepage" : "Return home"}
-      onClick={(event) => {
-        if (!onReturn) return;
-        event.preventDefault();
-        onReturn();
-      }}
-      onPointerEnter={(event) => event.pointerType === "mouse" && haptic("rigid", 0.5)}
-      onPointerDown={(event) => haptic("medium", 0.5, event.pointerType !== "mouse")}
-    >
-      <svg className={`home-pill-icon ${overlay ? "home-pill-icon-return" : ""}`} width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
-        {overlay
-          ? <path d="m9 6-6 6 6 6M4 12h9a7 7 0 0 1 7 7" />
-          : <path fillRule="evenodd" clipRule="evenodd" d="M2.52 7.823C2 8.77 2 9.915 2 12.203V13.725C2 17.625 2 19.576 3.172 20.788C4.344 22 6.229 22 10 22H14C17.771 22 19.657 22 20.828 20.788C21.999 19.576 22 17.626 22 13.725V12.204C22 9.915 22 8.771 21.48 7.823C20.962 6.874 20.013 6.286 18.116 5.108L16.116 3.867C14.111 2.622 13.108 2 12 2C10.892 2 9.89 2.622 7.884 3.867L5.884 5.108C3.987 6.286 3.039 6.874 2.52 7.823ZM9 17.25C8.80109 17.25 8.61032 17.329 8.46967 17.4697C8.32902 17.6103 8.25 17.8011 8.25 18C8.25 18.1989 8.32902 18.3897 8.46967 18.5303C8.61032 18.671 8.80109 18.75 9 18.75H15C15.1989 18.75 15.3897 18.671 15.5303 18.5303C15.671 18.3897 15.75 18.1989 15.75 18C15.75 17.8011 15.671 17.6103 15.5303 17.4697C15.3897 17.329 15.1989 17.25 15 17.25H9Z" />}
-      </svg>
-      <span className="home-pill-desktop">{overlay ? "Return" : "Home"}</span>
-    </a>
+    <>
+      <span className={`home-pill-glass ${overlay ? "project-overlay-home-glass" : ""}`} aria-hidden="true" />
+      <a
+        className={`home-pill ${overlay ? "project-overlay-home" : ""}`}
+        href="/"
+        aria-label="Return to homepage"
+        onClick={(event) => {
+          if (!onReturn) return;
+          event.preventDefault();
+          onReturn();
+        }}
+        onPointerEnter={(event) => event.pointerType === "mouse" && haptic("rigid", 0.5)}
+        onPointerDown={(event) => haptic("medium", 0.5, event.pointerType !== "mouse")}
+      >
+        <svg className="home-pill-icon home-pill-icon-return" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m9 6-6 6 6 6M4 12h9a7 7 0 0 1 7 7" />
+        </svg>
+        <span className="home-pill-desktop">Return</span>
+      </a>
+    </>
   );
 }

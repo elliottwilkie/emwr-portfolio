@@ -101,7 +101,7 @@ function HalloweenHover() {
   }, [hovered]);
 
   return (
-    <div className="collage-object drag-halloween movie-card" tabIndex={0} aria-label="Spooky films" onPointerEnter={() => setHovered(true)} onPointerLeave={() => setHovered(false)} onFocus={() => setHovered(true)} onBlur={() => setHovered(false)}>
+    <div className="collage-object drag-halloween movie-card" tabIndex={0} aria-label="Spooky films" onPointerEnter={(event) => event.pointerType === "mouse" && setHovered(true)} onPointerLeave={() => setHovered(false)} onFocus={(event) => event.currentTarget.matches(":focus-visible") && setHovered(true)} onBlur={() => setHovered(false)}>
       <span className="movie-ghost-layer">{ghosts.map((ghost) => <Ghost key={ghost.id} {...ghost} />)}</span>
       <img className="spooky-cover-image" src={bottomImages.spookyMovies} alt="" draggable={false} />
     </div>
@@ -147,7 +147,7 @@ export function HomePage() {
   }, []);
 
   useEffect(() => {
-    const updateScale = () => setPlaygroundScale(Math.min(1, Math.max(0.4, (window.innerWidth - 24) / 640)));
+    const updateScale = () => setPlaygroundScale(Math.min(1, Math.max(0.4, (document.documentElement.clientWidth - 48) / 640)));
     const frame = window.requestAnimationFrame(updateScale);
     window.addEventListener("resize", updateScale);
     return () => {
@@ -392,6 +392,7 @@ export function HomePage() {
   }, []);
 
   function rowEnter(event: ReactPointerEvent<HTMLElement>) {
+    if (event.pointerType !== "mouse") return;
     const row = event.currentTarget;
     const bounds = row.getBoundingClientRect();
     row.style.setProperty("--hover-duration", "0s");
@@ -404,6 +405,7 @@ export function HomePage() {
   }
 
   function rowLeave(event: ReactPointerEvent<HTMLElement>) {
+    if (event.pointerType !== "mouse") return;
     const row = event.currentTarget;
     const bounds = row.getBoundingClientRect();
     row.style.setProperty("--hover-y", event.clientY - bounds.top < bounds.height / 2 ? "-100%" : "100%");
@@ -411,6 +413,7 @@ export function HomePage() {
   }
 
   function projectEnter(index: number, event: ReactPointerEvent<HTMLElement>) {
+    if (event.pointerType !== "mouse") return;
     rowEnter(event);
     setActiveProject(index);
   }
