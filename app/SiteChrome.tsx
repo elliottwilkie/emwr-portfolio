@@ -101,7 +101,10 @@ export function ThemeToggle() {
           <circle className="theme-core" cx="12" cy="12" r="5" fill="currentColor" />
           {["M12 1.4v2.4", "m20.3 3.7-2.5 2.5", "M22.6 12h-2.4", "M12 22.6v-2.4", "M1.4 12h2.4", "m20.3 20.3-2.5-2.5", "m3.7 20.3 2.5-2.5", "m3.7 3.7 2.5 2.5"].map((path) => <path className="theme-ray" key={path} d={path} fill="none" strokeWidth="2" strokeLinejoin="round" />)}
         </g>
-        <path className="theme-moon-shape" d="M20.4 15.1A8 8 0 0 1 8.9 3.6a8.5 8.5 0 1 0 11.5 11.5Z" fill="currentColor" />
+        <g className="theme-moon-shape">
+          <circle cx="12" cy="12" r="7.5" fill="currentColor" />
+          <circle className="theme-moon-cutout" cx="16" cy="8.75" r="6.5" />
+        </g>
       </svg>
     </button>
   );

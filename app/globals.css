@@ -183,9 +183,10 @@ body:has(.project-modal-layer) .theme-toggle { opacity: 0; pointer-events: none;
 .theme-core, .theme-ray, .theme-moon-shape { transform-box: fill-box; transform-origin: center; transition: transform .34s cubic-bezier(.65,0,.35,1), opacity .22s ease; }
 .theme-ray { transition-delay: .045s; }
 .theme-moon-shape { opacity: 0; transform: rotate(-28deg) scale(.35); }
+.theme-moon-cutout { fill: var(--paper); transition: fill .2s ease; }
 :root[data-theme="dark"] .theme-core { opacity: 0; transform: scale(1.35); }
 :root[data-theme="dark"] .theme-ray { transform: rotate(45deg) scale(0); transition-delay: 0s; }
-:root[data-theme="dark"] .theme-moon-shape { opacity: 1; transform: rotate(0) scale(1.4); transition-delay: .045s; }
+:root[data-theme="dark"] .theme-moon-shape { opacity: 1; transform: rotate(0) scale(1.2); transition-delay: .045s; }
 
 @property --reveal-progress { syntax: "<length>"; inherits: false; initial-value: 0px; }
 @media (prefers-reduced-motion: no-preference) {
