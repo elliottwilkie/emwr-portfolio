@@ -110,7 +110,7 @@ function HalloweenHover() {
 
 function EscapingCat() {
   const cat = useRef<HTMLButtonElement>(null);
-  const position = useRef({ x: 194, y: 137 });
+  const position = useRef({ x: 214, y: 137 });
 
   const escape = () => {
     const element = cat.current;
@@ -119,7 +119,7 @@ function EscapingCat() {
     let next = position.current;
     for (let attempt = 0; attempt < 12; attempt += 1) {
       const candidate = {
-        x: 24 + Math.random() * (640 - 58 - 48),
+        x: 24 + Math.random() * (700 - 58 - 48),
         y: 24 + Math.random() * (500 - 56 - 48),
       };
       next = candidate;
@@ -189,7 +189,7 @@ export function HomePage() {
   }, []);
 
   useEffect(() => {
-    const updateScale = () => setPlaygroundScale(Math.min(1, Math.max(0.4, (document.documentElement.clientWidth - 64) / 640)));
+    const updateScale = () => setPlaygroundScale(Math.min(1, Math.max(0.4, (document.documentElement.clientWidth - 64) / 700)));
     const frame = window.requestAnimationFrame(updateScale);
     window.addEventListener("resize", updateScale);
     return () => {
@@ -563,6 +563,9 @@ export function HomePage() {
             <div className="collage-object drag-devils"><img src={bottomImages.devils} alt="Cardiff Devils" draggable={false} /></div>
             <HalloweenHover />
             <div className="collage-object drag-run"><img src={bottomImages.run} alt="Running route" draggable={false} /></div>
+            <div className="collage-object drag-sketch-video" aria-label="Sketching a portrait on iPad">
+              <video src="/media/sketching-portrait.m4v" autoPlay muted loop playsInline preload="metadata" />
+            </div>
             <div className="collage-object drag-wallpaper">
               <img src={bottomImages.wallpaper} alt="Phone wallpaper" draggable={false} />
               <span>my phone wallpaper<br />since '22</span>
