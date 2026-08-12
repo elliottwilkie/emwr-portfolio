@@ -564,7 +564,7 @@ export function HomePage() {
             <HalloweenHover />
             <div className="collage-object drag-run"><img src={bottomImages.run} alt="Running route" draggable={false} /></div>
             <div className="collage-object drag-sketch-video" aria-label="Sketching a portrait on iPad">
-              <video src="/media/sketching-portrait.m4v" autoPlay muted loop playsInline preload="metadata" />
+              <video src="/media/sketching-portrait-30fps.m4v" autoPlay muted loop playsInline preload="metadata" />
             </div>
             <div className="collage-object drag-wallpaper">
               <img src={bottomImages.wallpaper} alt="Phone wallpaper" draggable={false} />
