@@ -158,7 +158,7 @@ a { color: inherit; }
 .movie-ghost { position: absolute; bottom: 86px; width: 22px; height: 26px; pointer-events: none; animation: movie-ghost-rise 2.4s ease-out forwards; }
 @keyframes movie-ghost-rise { 0% { opacity: 0; transform: translateY(0) scale(.9); } 15% { opacity: 1; } 70% { opacity: 1; } 100% { opacity: 0; transform: translateY(-70px) scale(.8); } }
 .drag-run { --base-rotation: -3deg; left: 310px; top: 334px; width: 124px; height: 124px; border-radius: 8px; overflow: hidden; z-index: 3; }
-.drag-sketch-video { --base-rotation: 4deg; left: 464px; top: 332px; width: 124px; height: 165px; padding: 5px; border-radius: 9px; background: var(--photo-frame); box-shadow: 0 3px 9px rgba(0,0,0,.14); overflow: hidden; z-index: 4; }
+.drag-sketch-video { --base-rotation: 4deg; box-sizing: border-box; left: 464px; top: 332px; width: 124px; height: 165px; padding: 5px; border-radius: 9px; background: var(--photo-frame); box-shadow: 0 3px 9px rgba(0,0,0,.14); overflow: hidden; z-index: 4; }
 .drag-sketch-video video { display: block; width: 100%; height: 100%; border-radius: 5px; object-fit: cover; pointer-events: none; }
 .drag-wallpaper { --base-rotation: -1deg; left: 513px; top: 80px; width: 175px; height: 270px; z-index: 3; }
 .drag-wallpaper > img { height: 218px; object-fit: fill; border-radius: 14px; transform: rotate(5deg); box-shadow: 0 3px 9px rgba(0,0,0,.13); }
