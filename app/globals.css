@@ -45,10 +45,11 @@
   --sheet-border: transparent;
   --overlay-tint: rgba(10, 10, 10, 0.15);
   --experiment-surface: #fbfbfa;
+  --case-meta-surface: var(--soft);
   color-scheme: light;
 }
 
-:root[data-theme="dark"] { --ink: #f2f3ee; --body: #b6bab1; --muted: #858a80; --paper: #11120f; --soft: #1b1d19; --surface: #20221e; --hairline: rgba(242,243,238,.1); --underline: rgba(242,243,238,.2); --row-hover: rgba(255,255,255,.06); --snippet-surface: #f7f7f7; --photo-frame: #20221e; --selection-bg: #8966d6; --selection-ink: #fff; --sheet-surface: #1d1f1b; --sheet-border: rgba(242,243,238,.12); --overlay-tint: rgba(0,0,0,.3); --experiment-surface: #242621; color-scheme: dark; }
+:root[data-theme="dark"] { --ink: #f2f3ee; --body: #b6bab1; --muted: #858a80; --paper: #11120f; --soft: #1b1d19; --surface: #20221e; --hairline: rgba(242,243,238,.1); --underline: rgba(242,243,238,.2); --row-hover: rgba(255,255,255,.06); --snippet-surface: #f7f7f7; --photo-frame: #20221e; --selection-bg: #8966d6; --selection-ink: #fff; --sheet-surface: #1d1f1b; --sheet-border: rgba(242,243,238,.12); --overlay-tint: rgba(0,0,0,.3); --experiment-surface: #242621; --case-meta-surface: rgba(255,255,255,.05); color-scheme: dark; }
 
 * { box-sizing: border-box; }
 ::selection { background: var(--selection-bg); color: var(--selection-ink); }
@@ -197,7 +198,7 @@ body:has(.project-modal-layer) .theme-toggle { opacity: 0; pointer-events: none;
 .case-study-page, .case-study-content { width: 500px; margin-inline: auto; }
 .case-hero h1 { font-family: var(--font-sans); font-size: 22px; line-height: 26.4px; font-weight: var(--type-heading-weight); font-feature-settings: "cv01" 1, "cv02" 1, "cv03" 1, "cv04" 1, "cv05" 1, "cv09" 1, "cv11" 1, "ss09" 1, "zero" 1; font-variation-settings: "opsz" 14, "wght" var(--type-heading-weight); letter-spacing: -.44px; }
 .case-hero p { color: var(--body); font-size: 14px; line-height: 24px; margin-top: 16px; text-wrap: balance; }
-.case-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 36px; margin: 44px 0 48px; padding: 16px 20px; border-radius: 16px; background: var(--soft); }
+.case-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 36px; margin: 44px 0 48px; padding: 16px 20px; border-radius: 16px; background: var(--case-meta-surface); }
 .case-meta div { min-width: 0; }
 .case-meta dt, .case-meta dd { margin: 0; }
 .case-meta dt { font-size: 13px; line-height: 18px; font-weight: var(--type-regular-weight); font-feature-settings: "cv05" 1, "cv11" 1, "ss09" 1, "zero" 1; font-variation-settings: "opsz" 14, "wght" var(--type-regular-weight); letter-spacing: -.13px; }
