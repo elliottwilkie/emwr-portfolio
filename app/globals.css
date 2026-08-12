@@ -179,7 +179,7 @@ body:not(:has(.home-page)) .theme-toggle { display: none; }
 body:has(.project-modal-layer) .theme-toggle { opacity: 0; pointer-events: none; }
 .theme-toggle:focus-visible { outline: 2px solid #8f83b7; outline-offset: 2px; }
 .theme-toggle:active { transform: scale(.9); }
-.theme-icon { overflow: visible; view-transition-name: theme-icon; }
+.theme-icon { overflow: visible; view-transition-name: theme-icon; transition: transform .28s cubic-bezier(.16,1,.3,1); }
 .theme-icon-moon { fill: currentColor; stroke: none; }
 .theme-moon-disc { scale: 1.7; transform-origin: 12px 12px; }
 
@@ -274,6 +274,8 @@ body:has(.project-modal-layer) .theme-toggle { opacity: 0; pointer-events: none;
   .project-row:hover .project-arrow, .simple-row:hover .row-arrow { opacity: 1; transform: scale(1); }
   .simple-row:hover .simple-name { text-decoration-color: currentColor; }
   .home-links:has(.simple-row:hover) .simple-row:not(:hover) { opacity: .5; }
+  .theme-toggle:hover { transform: translateY(-1px) scale(1.06); }
+  .theme-toggle:hover .theme-icon { transform: rotate(10deg); }
   .home-pill:hover { background: rgba(55,55,55,.72); transform: translateX(-50%) translateY(-2px); }
   .project-modal-expand:hover { color: var(--ink); background: var(--row-hover); transform: scale(1.04); }
   .photo-grid figure:hover figcaption { opacity: 1; transform: translateY(0); }

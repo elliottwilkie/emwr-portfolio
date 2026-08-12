@@ -95,7 +95,15 @@ export function ThemeToggle() {
   };
 
   return (
-    <button ref={button} className="theme-toggle" type="button" aria-label={`Switch to ${dark ? "light" : "dark"} mode`} aria-pressed={dark} onClick={toggle}>
+    <button
+      ref={button}
+      className="theme-toggle"
+      type="button"
+      aria-label={`Switch to ${dark ? "light" : "dark"} mode`}
+      aria-pressed={dark}
+      onPointerEnter={(event) => event.pointerType === "mouse" && haptic("selection", 0.48)}
+      onClick={toggle}
+    >
       {dark ? (
         <svg className="theme-icon theme-icon-moon" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
           <defs>
