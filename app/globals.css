@@ -180,12 +180,12 @@ body:has(.project-modal-layer) .theme-toggle { opacity: 0; pointer-events: none;
 .theme-toggle:focus-visible { outline: 2px solid #8f83b7; outline-offset: 2px; }
 .theme-toggle:active { transform: scale(.9); }
 .theme-icon { overflow: visible; view-transition-name: theme-icon; }
-.theme-core, .theme-ray, .theme-crescent-cutout { transform-box: fill-box; transform-origin: center; transition: transform .34s cubic-bezier(.65,0,.35,1), opacity .2s ease, fill .2s ease; }
+.theme-core, .theme-ray, .theme-moon-shape { transform-box: fill-box; transform-origin: center; transition: transform .34s cubic-bezier(.65,0,.35,1), opacity .22s ease; }
 .theme-ray { transition-delay: .045s; }
-.theme-crescent-cutout { opacity: 0; transform: translate(5px,-5px) scale(.6); }
-:root[data-theme="dark"] .theme-core { transform: scale(1.7); }
+.theme-moon-shape { opacity: 0; transform: rotate(-28deg) scale(.35); }
+:root[data-theme="dark"] .theme-core { opacity: 0; transform: scale(1.35); }
 :root[data-theme="dark"] .theme-ray { transform: rotate(45deg) scale(0); transition-delay: 0s; }
-:root[data-theme="dark"] .theme-crescent-cutout { opacity: 1; transform: translate(-3px,2px) scale(1); transition-delay: .045s; }
+:root[data-theme="dark"] .theme-moon-shape { opacity: 1; transform: rotate(0) scale(1.4); transition-delay: .045s; }
 
 @property --reveal-progress { syntax: "<length>"; inherits: false; initial-value: 0px; }
 @media (prefers-reduced-motion: no-preference) {
