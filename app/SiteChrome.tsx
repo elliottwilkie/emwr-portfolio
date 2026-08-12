@@ -123,8 +123,9 @@ export function HomePill({ onReturn, overlay = false }: { onReturn?: () => void;
         onPointerEnter={(event) => event.pointerType === "mouse" && haptic("rigid", 0.5)}
         onPointerDown={(event) => haptic("medium", 0.5, event.pointerType !== "mouse")}
       >
-        <svg className="home-pill-icon home-pill-icon-return" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="m9 6-6 6 6 6M4 12h9a7 7 0 0 1 7 7" />
+        <svg className="home-pill-icon home-pill-icon-return" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+          <path d="M.5 9.5h9a4 4 0 0 0 0-8h-3" />
+          <path d="m3.5 6.5-3 3 3 3" />
         </svg>
         <span className="home-pill-desktop">Return</span>
       </a>

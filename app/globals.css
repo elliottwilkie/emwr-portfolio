@@ -230,7 +230,7 @@ body:has(.project-modal-layer) .theme-toggle { opacity: 0; pointer-events: none;
 .home-pill-glass::after { height: 44%; -webkit-backdrop-filter: blur(20px) saturate(1.08); backdrop-filter: blur(20px) saturate(1.08); -webkit-mask-image: linear-gradient(to bottom, transparent, #000 82%); mask-image: linear-gradient(to bottom, transparent, #000 82%); transform: scaleY(1.05); }
 .home-pill { position: fixed; left: 50%; bottom: 24px; z-index: 60; display: inline-flex; align-items: center; gap: 6px; min-height: 48px; padding: 0 18px; border-radius: 999px; background: rgba(74,74,74,.62); color: #fff; text-decoration: none; backdrop-filter: blur(8px); box-shadow: 0 4px 18px rgba(0,0,0,.12); transform: translateX(-50%); transition: transform 160ms ease, background 160ms ease; }
 .home-pill-icon { width: 15px; height: 15px; flex: none; fill: currentColor; stroke: none; opacity: .9; }
-.home-pill-icon-return { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.home-pill-icon-return { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round; }
 .project-overlay-home { display: none; }
 .project-overlay-home-glass { display: none; }
 
