@@ -14,10 +14,10 @@ export function ArtGalleryPage({ embedded = false }: { embedded?: boolean }) {
       </header>
       <div className="two-column-gallery art-grid">
         <div className="art-column">
-          {artImages.slice(0, 7).map((image, index) => <figure key={`${image}-${index}`}><img src={image} alt={`Illustration ${index + 1}`} loading="eager" /></figure>)}
+          {artImages.slice(0, 7).map((image, index) => <figure key={`${image}-${index}`}><img src={image} alt={`Illustration ${index + 1}`} loading={index < 2 ? "eager" : "lazy"} decoding="async" /></figure>)}
         </div>
         <div className="art-column">
-          {artImages.slice(7).map((image, index) => <figure key={`${image}-${index + 7}`}><img src={image} alt={`Illustration ${index + 8}`} loading="eager" /></figure>)}
+          {artImages.slice(7).map((image, index) => <figure key={`${image}-${index + 7}`}><img src={image} alt={`Illustration ${index + 8}`} loading="lazy" decoding="async" /></figure>)}
         </div>
       </div>
       {!embedded && <TimeFooter wide />}
@@ -36,7 +36,7 @@ export function PhotographyPage({ embedded = false }: { embedded?: boolean }) {
         <p>I love to travel, and whenever I slip into pretending I&apos;m a photographer. I like capturing places, details, and little moments that would otherwise blur together.</p>
       </header>
       <div className="two-column-gallery photo-grid">
-        {photoImages.map((item, index) => <figure key={`${item.image}-${index}`}><img src={item.image} alt={item.label} loading="eager" /><figcaption role="tooltip">{item.label}</figcaption></figure>)}
+        {photoImages.map((item, index) => <figure key={`${item.image}-${index}`}><img src={item.image} alt={item.label} loading={index < 2 ? "eager" : "lazy"} decoding="async" /><figcaption role="tooltip">{item.label}</figcaption></figure>)}
       </div>
       {!embedded && <TimeFooter wide />}
       {!embedded && <HomePill />}

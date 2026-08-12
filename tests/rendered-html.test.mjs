@@ -29,10 +29,20 @@ test("server-renders the portfolio homepage and navigation", async () => {
   assert.match(html, /href="\/photos"/);
   assert.match(html, /href="\/elliott-wilkie-cv\.pdf"/);
   assert.match(html, /download="Elliott-Wilkie-Rosca-CV\.pdf"/);
-  assert.match(html, /aria-label="Image carousel"/);
+  assert.doesNotMatch(html, /aria-label="Image carousel"/);
   assert.match(html, /aria-label="Recently played on Spotify"/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/i);
   await access(new URL("../public/elliott-wilkie-cv.pdf", import.meta.url));
+});
+
+test("server-renders project sharing metadata", async () => {
+  const response = await render("/work/oath");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(html, /<title>Oath — Elliott Wilkie-Roşca<\/title>/);
+  assert.match(html, /rel="canonical" href="https:\/\/emwr\.me\/work\/oath"/);
+  assert.match(html, /property="og:title" content="Oath — Elliott Wilkie-Roşca"/);
 });
 
 test("server-renders the complete experiments collection", async () => {

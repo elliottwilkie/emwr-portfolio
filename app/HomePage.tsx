@@ -8,6 +8,8 @@ import { PageOverlay, ProjectSheet } from "./ProjectSheet";
 import { ExperimentsPage } from "./selected-works/ExperimentsPage";
 import { ArtGalleryPage, PhotographyPage } from "./GalleryPages";
 
+const SHOW_SNIPPETS = false;
+
 type SpotifyTrack = {
   trackName: string;
   artistName: string;
@@ -68,6 +70,39 @@ function RecentlyPlayed() {
         <em>Played <b>{track ? playedAgo(track.playedAt, now) : "loading…"}</b></em>
       </span>
     </a>
+  );
+}
+
+function FooterSketchVideo() {
+  const frame = useRef<HTMLDivElement>(null);
+  const [shouldLoad, setShouldLoad] = useState(false);
+
+  useEffect(() => {
+    const mobile = window.matchMedia("(max-width: 720px)");
+    if (!mobile.matches) {
+      const frameId = window.requestAnimationFrame(() => setShouldLoad(true));
+      return () => window.cancelAnimationFrame(frameId);
+    }
+
+    const element = frame.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        setShouldLoad(true);
+        observer.disconnect();
+      },
+      { rootMargin: "320px 0px" },
+    );
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={frame} className="collage-object drag-sketch-video" aria-label="Sketching a portrait on iPad">
+      {shouldLoad && <video src="/media/sketching-portrait-30fps.m4v" autoPlay muted loop playsInline preload="metadata" />}
+    </div>
   );
 }
 
@@ -473,7 +508,7 @@ export function HomePage() {
         </p>
       </section>
 
-      <section className="home-column snippets" aria-labelledby="snippets-title" hidden>
+      {SHOW_SNIPPETS && <section className="home-column snippets" aria-labelledby="snippets-title">
         <h2 id="snippets-title">Snippets</h2>
         <div
           className="snippet-window"
@@ -498,7 +533,7 @@ export function HomePage() {
             <span className="snippet-end-space" data-carousel-content aria-hidden="true" />
           </div>
         </div>
-      </section>
+      </section>}
 
       <section className="home-column home-links home-reveal reveal-projects" aria-labelledby="projects-title">
         <h2 id="projects-title">Projects</h2>
@@ -563,9 +598,7 @@ export function HomePage() {
             <div className="collage-object drag-devils"><img src={bottomImages.devils} alt="Cardiff Devils" draggable={false} /></div>
             <HalloweenHover />
             <div className="collage-object drag-run"><img src={bottomImages.run} alt="Running route" draggable={false} /></div>
-            <div className="collage-object drag-sketch-video" aria-label="Sketching a portrait on iPad">
-              <video src="/media/sketching-portrait-30fps.m4v" autoPlay muted loop playsInline preload="metadata" />
-            </div>
+            <FooterSketchVideo />
             <div className="collage-object drag-wallpaper">
               <img src={bottomImages.wallpaper} alt="Phone wallpaper" draggable={false} />
               <span>my phone wallpaper<br />since '22</span>
