@@ -131,8 +131,12 @@ export function HomePill({ onReturn, overlay = false }: { onReturn?: () => void;
       <span className={`home-pill-glass ${overlay ? "project-overlay-home-glass" : ""}`} aria-hidden="true">
         <svg className="home-pill-glass-filter" width="0" height="0">
           <filter id="return-glass-warp" x="-12%" y="-18%" width="124%" height="136%" colorInterpolationFilters="sRGB">
-            <feTurbulence type="fractalNoise" baseFrequency="0.009 0.028" numOctaves="2" seed="7" result="noise" />
-            <feDisplacementMap in="SourceGraphic" in2="noise" scale="18" xChannelSelector="R" yChannelSelector="B" />
+            <feTurbulence type="fractalNoise" baseFrequency="0.007 0.022" numOctaves="2" seed="7" result="noise">
+              <animate attributeName="baseFrequency" values="0.007 0.022;0.011 0.018;0.006 0.026;0.007 0.022" dur="9s" repeatCount="indefinite" />
+            </feTurbulence>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="22" xChannelSelector="R" yChannelSelector="B">
+              <animate attributeName="scale" values="18;26;21;18" dur="7s" repeatCount="indefinite" />
+            </feDisplacementMap>
           </filter>
         </svg>
         <i className="home-pill-glass-band glass-band-one" />
