@@ -224,7 +224,14 @@ export function HomePage() {
   }, []);
 
   useEffect(() => {
-    const updateScale = () => setPlaygroundScale(Math.min(1, Math.max(0.4, (document.documentElement.clientWidth - 64) / 740)));
+    const updateScale = () => {
+      const viewportWidth = document.documentElement.clientWidth;
+      const baseScale = Math.max(0.4, (viewportWidth - 64) / 740);
+      const mobileBoost = viewportWidth <= 720
+        ? 1 + 0.1 * Math.min(1, Math.max(0, (720 - viewportWidth) / 330))
+        : 1;
+      setPlaygroundScale(Math.min(1, baseScale * mobileBoost));
+    };
     const frame = window.requestAnimationFrame(updateScale);
     window.addEventListener("resize", updateScale);
     return () => {
