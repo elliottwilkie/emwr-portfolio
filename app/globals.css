@@ -181,6 +181,7 @@ body:has(.project-modal-layer) .theme-toggle { opacity: 0; pointer-events: none;
 .theme-toggle:active { transform: scale(.9); }
 .theme-icon { overflow: visible; view-transition-name: theme-icon; }
 .theme-icon-moon { fill: currentColor; stroke: none; }
+.theme-moon-disc { scale: 1.7; transform-origin: 12px 12px; }
 
 @property --reveal-progress { syntax: "<length>"; inherits: false; initial-value: 0px; }
 @media (prefers-reduced-motion: no-preference) {
