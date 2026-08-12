@@ -250,7 +250,6 @@ body:has(.home-page) .theme-toggle { left: auto; right: 16px; top: 16px; }
 .project-modal-expand { left: 16px; }
 .project-modal-close { right: 16px; }
 .project-modal-expand svg, .project-modal-close svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
-.project-modal-close svg { width: 19px; height: 19px; stroke-width: 1.8; }
 .project-modal-expand:focus-visible, .project-modal-close:focus-visible { outline: 2px solid color-mix(in srgb, var(--ink) 28%, transparent); outline-offset: 2px; }
 .project-modal-expand:disabled, .project-modal-close:disabled { pointer-events: none; }
 .project-modal .case-study-content { padding: 132px 0 148px; animation: project-content-in .38s .08s cubic-bezier(.16,1,.3,1) both; }
