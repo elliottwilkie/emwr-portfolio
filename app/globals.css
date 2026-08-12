@@ -176,8 +176,8 @@ a { color: inherit; }
 .time-copy, .time-updated { white-space: nowrap; }
 .time-updated { color: var(--muted); font-family: inherit; font-size: 14px; line-height: var(--type-body-line-height); font-weight: var(--type-regular-weight); letter-spacing: -.14px; opacity: .72; }
 @keyframes sleepy-z { 0%, 18% { opacity: 0; transform: translate(0,3px) scale(.75); } 30%, 58% { opacity: .72; } 76%, 100% { opacity: 0; transform: translate(7px,-7px) scale(1.18); } }
-.theme-toggle { position: absolute; right: 24px; top: 24px; z-index: 100; display: grid; place-items: center; width: 32px; height: 32px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: var(--ink); outline: none; cursor: pointer; transition: transform .1s cubic-bezier(.23,1,.32,1), background-color .1s cubic-bezier(.23,1,.32,1), opacity .18s ease; }
-body:has(.home-page) .theme-toggle { left: calc(50% + 178px); right: auto; top: 128px; }
+.theme-toggle { position: absolute; right: 16px; top: 16px; z-index: 100; display: grid; place-items: center; width: 24px; height: 24px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: var(--ink); outline: none; cursor: pointer; transition: transform .1s cubic-bezier(.23,1,.32,1), background-color .1s cubic-bezier(.23,1,.32,1), opacity .18s ease; }
+body:has(.home-page) .theme-toggle { left: auto; right: 16px; top: 16px; }
 body:not(:has(.home-page)) .theme-toggle { display: none; }
 body:has(.project-modal-layer) .theme-toggle { opacity: 0; pointer-events: none; }
 .theme-toggle:focus-visible { outline: 2px solid #8f83b7; outline-offset: 2px; }
@@ -389,7 +389,7 @@ body:has(.project-modal-layer) .theme-toggle { opacity: 0; pointer-events: none;
   .home-playground-column > .time-footer { margin-top: 0; }
   .time-footer { width: calc(100% - 64px); }
   .corner-face { right: 16px; bottom: 16px; }
-  body:has(.home-page) .theme-toggle { left: auto; right: 32px; top: 128px; }
+  body:has(.home-page) .theme-toggle { left: auto; right: 32px; top: 10px; }
 
   .detail-page { position: relative; padding-top: 108px; }
   .case-study-page, .case-study-content { width: calc(100% - 64px); }
