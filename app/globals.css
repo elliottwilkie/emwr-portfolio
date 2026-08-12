@@ -181,8 +181,9 @@ a { color: inherit; }
 @keyframes sleepy-z { 0%, 18% { opacity: 0; transform: translate(0,3px) scale(.75); } 30%, 58% { opacity: .72; } 76%, 100% { opacity: 0; transform: translate(7px,-7px) scale(1.18); } }
 .theme-toggle { position: absolute; right: 16px; top: 16px; z-index: 100; display: grid; place-items: center; width: 24px; height: 24px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: var(--ink); outline: none; cursor: pointer; transition: transform .1s cubic-bezier(.23,1,.32,1), background-color .1s cubic-bezier(.23,1,.32,1), opacity .18s ease; }
 body:has(.home-page) .theme-toggle { left: auto; right: 16px; top: 16px; }
-body:not(:has(.home-page)) .theme-toggle { display: none; }
-body:has(.project-modal-layer) .theme-toggle { opacity: 0; pointer-events: none; }
+@media (min-width: 721px) {
+  body:has(.project-modal-layer:not(.is-expanded)) .theme-toggle { opacity: 0; pointer-events: none; }
+}
 .theme-toggle:focus-visible { outline: 2px solid #8f83b7; outline-offset: 2px; }
 .theme-toggle:active { transform: scale(.9); }
 .theme-icon { overflow: visible; view-transition-name: theme-icon; transition: transform .28s cubic-bezier(.16,1,.3,1); }
@@ -395,7 +396,7 @@ body:has(.project-modal-layer) .theme-toggle { opacity: 0; pointer-events: none;
   .home-playground-column > .time-footer { margin-top: 0; }
   .time-footer { width: calc(100% - 64px); }
   .corner-face { right: 16px; bottom: 16px; }
-  body:has(.home-page) .theme-toggle { left: auto; right: 32px; top: 10px; }
+  .theme-toggle, body:has(.home-page) .theme-toggle { left: auto; right: 32px; top: 10px; }
 
   .detail-page { position: relative; padding-top: 108px; }
   .case-study-page, .case-study-content { width: calc(100% - 64px); }
