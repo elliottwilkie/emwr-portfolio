@@ -108,6 +108,48 @@ function HalloweenHover() {
   );
 }
 
+function EscapingCat() {
+  const cat = useRef<HTMLButtonElement>(null);
+  const position = useRef({ x: 194, y: 137 });
+
+  const escape = () => {
+    const element = cat.current;
+    if (!element) return;
+
+    let next = position.current;
+    for (let attempt = 0; attempt < 12; attempt += 1) {
+      const candidate = {
+        x: 24 + Math.random() * (640 - 58 - 48),
+        y: 24 + Math.random() * (500 - 56 - 48),
+      };
+      next = candidate;
+      if (Math.hypot(candidate.x - position.current.x, candidate.y - position.current.y) > 150) break;
+    }
+
+    position.current = next;
+    element.style.left = `${next.x.toFixed(1)}px`;
+    element.style.top = `${next.y.toFixed(1)}px`;
+    element.style.setProperty("--base-rotation", `${(-8 + Math.random() * 16).toFixed(1)}deg`);
+    element.classList.remove("is-escaping");
+    void element.offsetWidth;
+    element.classList.add("is-escaping");
+  };
+
+  return (
+    <button
+      ref={cat}
+      className="collage-object drag-drawing cat-doodle"
+      type="button"
+      aria-label="Catch the cat"
+      onPointerDown={(event) => haptic("nudge", 0.38, event.pointerType !== "mouse")}
+      onClick={escape}
+      onAnimationEnd={(event) => event.currentTarget.classList.remove("is-escaping")}
+    >
+      <img src={bottomImages.drawing} alt="" draggable={false} />
+    </button>
+  );
+}
+
 function RowArrow({ direction }: { direction: "right" | "external" | "download" }) {
   if (direction === "external") return <svg className="row-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" /></svg>;
   if (direction === "download") return <svg className="row-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12m-5-5 5 5 5-5M5 20h14" /></svg>;
@@ -174,7 +216,7 @@ export function HomePage() {
     const pointerDown = (event: PointerEvent) => {
       if (event.button !== 0) return;
       const candidate = (event.target as Element).closest<HTMLElement>(".collage-object");
-      if (!candidate || !surface.contains(candidate)) return;
+      if (!candidate || !surface.contains(candidate) || candidate.classList.contains("cat-doodle")) return;
       object = candidate;
       pointerId = event.pointerId;
       startX = event.clientX;
@@ -513,7 +555,7 @@ export function HomePage() {
         <section className="playground-shell" style={{ "--playground-scale": playgroundScale, height: `${500 * playgroundScale}px` } as CSSProperties} aria-label="Personal objects">
           <div className="playground" ref={playground}>
             <div className="collage-object drag-music"><RecentlyPlayed /></div>
-            <div className="collage-object drag-drawing"><img src={bottomImages.drawing} alt="" draggable={false} /></div>
+            <EscapingCat />
             <div className="collage-object drag-main-photo"><div className="photo-stack"><img src={bottomImages.desk} alt="Personal photo" draggable={false} /></div></div>
             <div className="collage-object drag-friends"><img src={bottomImages.friends} alt="Friends at a celebration" draggable={false} /></div>
             <div className="collage-object drag-figma"><img src={bottomImages.figma} alt="Figma" draggable={false} /></div>
