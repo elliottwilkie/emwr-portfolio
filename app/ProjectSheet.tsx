@@ -52,7 +52,7 @@ export function PageOverlay({ label, onClose, children }: { label: string; onClo
         </button>
         <button className="project-modal-close" type="button" aria-label={`Close ${label}`} disabled={closing || expanded} onPointerDown={(event) => haptic("medium", .38, event.pointerType !== "mouse")} onClick={requestClose}>
           <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="m7 7 10 10M17 7 7 17" />
+            <path d="m5.5 5.5 13 13M18.5 5.5l-13 13" />
           </svg>
         </button>
         <div className="project-modal-scroll">{children}</div>
