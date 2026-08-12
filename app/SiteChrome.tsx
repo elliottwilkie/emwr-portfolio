@@ -126,167 +126,24 @@ export function ThemeToggle() {
 }
 
 export function HomePill({ onReturn, overlay = false }: { onReturn?: () => void; overlay?: boolean } = {}) {
-  const glass = useRef<HTMLDivElement>(null);
-  const displacement = useRef<SVGFEDisplacementMapElement>(null);
-  const redOffset = useRef<SVGFEOffsetElement>(null);
-  const blueOffset = useRef<SVGFEOffsetElement>(null);
-  const slices = useRef<Array<HTMLSpanElement | null>>([]);
-  const filterId = "return-scroll-warp";
-
-  useEffect(() => {
-    const glassElement = glass.current;
-    if (!glassElement || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const scrollElement = overlay ? document.querySelector<HTMLElement>(".project-modal-scroll") : null;
-    const scrollTarget: Window | HTMLElement = scrollElement ?? window;
-    const sourceElement = overlay
-      ? scrollElement?.firstElementChild as HTMLElement | null
-      : document.querySelector<HTMLElement>("main.detail-page");
-    const sliceElements = slices.current.filter((slice): slice is HTMLSpanElement => Boolean(slice));
-    if (!sourceElement || sliceElements.length === 0) return;
-
-    const clones = sliceElements.map((slice) => {
-      const clone = sourceElement.cloneNode(true) as HTMLElement;
-      clone.classList.add("home-pill-warp-clone");
-      clone.setAttribute("aria-hidden", "true");
-      clone.querySelectorAll(".home-pill, .home-pill-glass, .theme-toggle, .project-modal-expand").forEach((element) => element.remove());
-      clone.querySelectorAll<HTMLElement>("a, button, input, textarea, select, [tabindex]").forEach((element) => element.setAttribute("tabindex", "-1"));
-      slice.replaceChildren(clone);
-      return clone;
-    });
-
-    const syncClones = () => {
-      const sourceRect = sourceElement.getBoundingClientRect();
-      const sourceCanvases = Array.from(sourceElement.querySelectorAll("canvas"));
-
-      sliceElements.forEach((slice, index) => {
-        const sliceRect = slice.getBoundingClientRect();
-        const clone = clones[index];
-        clone.style.left = `${sourceRect.left - sliceRect.left}px`;
-        clone.style.top = `${sourceRect.top - sliceRect.top}px`;
-        clone.style.width = `${sourceRect.width}px`;
-        clone.style.height = `${sourceRect.height}px`;
-        clone.style.transformOrigin = `${window.innerWidth / 2 - sourceRect.left}px ${window.innerHeight - sourceRect.top}px`;
-
-        clone.querySelectorAll("canvas").forEach((canvas, canvasIndex) => {
-          const sourceCanvas = sourceCanvases[canvasIndex];
-          if (!sourceCanvas) return;
-          const context = (canvas as HTMLCanvasElement).getContext("2d");
-          try { context?.drawImage(sourceCanvas, 0, 0); } catch { /* The live page remains visible if a canvas cannot be mirrored. */ }
-        });
-      });
-    };
-
-    syncClones();
-    glassElement.style.setProperty("--warp-opacity", "1");
-    const readPosition = () => scrollElement?.scrollTop ?? window.scrollY;
-    let lastPosition = readPosition();
-    let lastTime = performance.now();
-    let targetVelocity = 0;
-    let velocity = 0;
-    let animationFrame = 0;
-
-    const renderWarp = () => {
-      targetVelocity *= 0.94;
-      velocity += (targetVelocity - velocity) * 0.28;
-
-      const force = Math.min(Math.abs(velocity) / 0.32, 1);
-      const direction = Math.sign(velocity) || 1;
-      const shift = Math.max(-20, Math.min(20, velocity * 10));
-      const channelOffset = direction * force * 8;
-
-      glassElement.style.setProperty("--warp-opacity", "1");
-      glassElement.style.setProperty("--warp-scale-one", String(1.04 + force * 0.14));
-      glassElement.style.setProperty("--warp-scale-two", String(1.1 + force * 0.2));
-      glassElement.style.setProperty("--warp-scale-three", String(1.18 + force * 0.3));
-      glassElement.style.setProperty("--warp-shift", `${shift}px`);
-      glassElement.style.setProperty("--warp-shift-two", `${shift * 0.65}px`);
-      glassElement.style.setProperty("--warp-shift-three", `${shift * 0.35}px`);
-      glassElement.style.setProperty("--warp-skew", `${direction * force * 0.7}deg`);
-      glassElement.style.setProperty("--warp-skew-inverse", `${direction * force * -0.7}deg`);
-      displacement.current?.setAttribute("scale", String(12 + force * 30));
-      redOffset.current?.setAttribute("dy", String(channelOffset));
-      blueOffset.current?.setAttribute("dy", String(-channelOffset));
-
-      if (Math.abs(velocity) > 0.004 || Math.abs(targetVelocity) > 0.004) {
-        animationFrame = window.requestAnimationFrame(renderWarp);
-      } else {
-        glassElement.style.setProperty("--warp-scale-one", "1.04");
-        glassElement.style.setProperty("--warp-scale-two", "1.1");
-        glassElement.style.setProperty("--warp-scale-three", "1.18");
-        glassElement.style.setProperty("--warp-shift", "0px");
-        glassElement.style.setProperty("--warp-shift-two", "0px");
-        glassElement.style.setProperty("--warp-shift-three", "0px");
-        glassElement.style.setProperty("--warp-skew", "0deg");
-        glassElement.style.setProperty("--warp-skew-inverse", "0deg");
-        displacement.current?.setAttribute("scale", "12");
-        redOffset.current?.setAttribute("dy", "0");
-        blueOffset.current?.setAttribute("dy", "0");
-        animationFrame = 0;
-      }
-    };
-
-    const onScroll = () => {
-      const now = performance.now();
-      const position = readPosition();
-      const elapsed = Math.max(8, Math.min(50, now - lastTime));
-      const distance = position - lastPosition;
-      const timedVelocity = distance / elapsed;
-      const distanceVelocity = Math.sign(distance) * Math.min(Math.abs(distance) / 6, 1.4);
-      const nextVelocity = Math.abs(timedVelocity) > Math.abs(distanceVelocity) ? timedVelocity : distanceVelocity;
-      const retainedVelocity = Math.sign(targetVelocity) === Math.sign(nextVelocity)
-        ? targetVelocity * 0.96 + nextVelocity * 0.7
-        : nextVelocity;
-      targetVelocity = Math.max(-2.8, Math.min(2.8, retainedVelocity));
-      lastPosition = position;
-      lastTime = now;
-      syncClones();
-      if (!animationFrame) animationFrame = window.requestAnimationFrame(renderWarp);
-    };
-
-    const onWheel = (event: WheelEvent) => {
-      if (!event.deltaY) return;
-      targetVelocity = Math.max(-2.8, Math.min(2.8, event.deltaY / 24));
-      if (!animationFrame) animationFrame = window.requestAnimationFrame(renderWarp);
-    };
-
-    scrollTarget.addEventListener("scroll", onScroll, { passive: true });
-    scrollTarget.addEventListener("wheel", onWheel, { passive: true });
-    window.addEventListener("resize", syncClones, { passive: true });
-    return () => {
-      scrollTarget.removeEventListener("scroll", onScroll);
-      scrollTarget.removeEventListener("wheel", onWheel);
-      window.removeEventListener("resize", syncClones);
-      if (animationFrame) window.cancelAnimationFrame(animationFrame);
-      sliceElements.forEach((slice) => slice.replaceChildren());
-    };
-  }, [overlay]);
-
   return (
     <>
-      <div ref={glass} className={`home-pill-glass ${overlay ? "project-overlay-home-glass" : ""}`} aria-hidden="true">
+      <span className={`home-pill-glass ${overlay ? "project-overlay-home-glass" : ""}`} aria-hidden="true">
         <svg className="home-pill-glass-filter" width="0" height="0">
-          <filter id={filterId} x="-18%" y="-32%" width="136%" height="164%" colorInterpolationFilters="sRGB">
-            <feTurbulence type="fractalNoise" baseFrequency="0.004 0.032" numOctaves="2" seed="11" result="warp-noise" />
-            <feDisplacementMap ref={displacement} in="SourceGraphic" in2="warp-noise" scale="12" xChannelSelector="R" yChannelSelector="B" result="warped" />
-            <feColorMatrix in="warped" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="red" />
-            <feColorMatrix in="warped" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="green" />
-            <feColorMatrix in="warped" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="blue" />
-            <feOffset ref={redOffset} in="red" dy="0" result="red-shifted" />
-            <feOffset ref={blueOffset} in="blue" dy="0" result="blue-shifted" />
-            <feBlend in="red-shifted" in2="green" mode="screen" result="red-green" />
-            <feBlend in="red-green" in2="blue-shifted" mode="screen" />
+          <filter id="return-glass-warp" x="-12%" y="-18%" width="124%" height="136%" colorInterpolationFilters="sRGB">
+            <feTurbulence type="fractalNoise" baseFrequency="0.007 0.022" numOctaves="2" seed="7" result="noise">
+              <animate attributeName="baseFrequency" values="0.007 0.022;0.011 0.018;0.006 0.026;0.007 0.022" dur="9s" repeatCount="indefinite" />
+            </feTurbulence>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="22" xChannelSelector="R" yChannelSelector="B">
+              <animate attributeName="scale" values="18;26;21;18" dur="7s" repeatCount="indefinite" />
+            </feDisplacementMap>
           </filter>
         </svg>
-        {["one", "two", "three"].map((name, index) => (
-          <span
-            key={name}
-            ref={(element) => { slices.current[index] = element; }}
-            className={`home-pill-glass-band glass-band-${name}`}
-            style={{ filter: `url(#${filterId})` }}
-          />
-        ))}
-      </div>
+        <i className="home-pill-glass-band glass-band-one" />
+        <i className="home-pill-glass-band glass-band-two" />
+        <i className="home-pill-glass-band glass-band-three" />
+        <i className="home-pill-glass-band glass-band-four" />
+      </span>
       <a
         className={`home-pill ${overlay ? "project-overlay-home" : ""}`}
         href="/"
