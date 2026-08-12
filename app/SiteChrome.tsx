@@ -96,16 +96,18 @@ export function ThemeToggle() {
 
   return (
     <button ref={button} className="theme-toggle" type="button" aria-label={`Switch to ${dark ? "light" : "dark"} mode`} aria-pressed={dark} onClick={toggle}>
-      <svg className="theme-icon" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
-        <g stroke="currentColor" strokeLinecap="round">
-          <circle className="theme-core" cx="12" cy="12" r="5" fill="currentColor" />
-          {["M12 1.4v2.4", "m20.3 3.7-2.5 2.5", "M22.6 12h-2.4", "M12 22.6v-2.4", "M1.4 12h2.4", "m20.3 20.3-2.5-2.5", "m3.7 20.3 2.5-2.5", "m3.7 3.7 2.5 2.5"].map((path) => <path className="theme-ray" key={path} d={path} fill="none" strokeWidth="2" strokeLinejoin="round" />)}
-        </g>
-        <g className="theme-moon-shape">
-          <circle cx="12" cy="12" r="7.5" fill="currentColor" />
-          <circle className="theme-moon-cutout" cx="16" cy="8.75" r="6.5" />
-        </g>
-      </svg>
+      {dark ? (
+        <svg className="theme-icon theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M9.28 4.48A8 8 0 1 0 19.52 14.72A8 8 0 0 1 9.28 4.48Z" />
+        </svg>
+      ) : (
+        <svg className="theme-icon" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+          <g stroke="currentColor" strokeLinecap="round">
+            <circle cx="12" cy="12" r="5" fill="currentColor" />
+            {["M12 1.4v2.4", "m20.3 3.7-2.5 2.5", "M22.6 12h-2.4", "M12 22.6v-2.4", "M1.4 12h2.4", "m20.3 20.3-2.5-2.5", "m3.7 20.3 2.5-2.5", "m3.7 3.7 2.5 2.5"].map((path) => <path key={path} d={path} fill="none" strokeWidth="2" strokeLinejoin="round" />)}
+          </g>
+        </svg>
+      )}
     </button>
   );
 }
