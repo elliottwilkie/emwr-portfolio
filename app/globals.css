@@ -183,9 +183,9 @@ body:has(.project-modal-layer) .theme-toggle { opacity: 0; pointer-events: none;
 .theme-core, .theme-ray, .theme-crescent-cutout { transform-box: fill-box; transform-origin: center; transition: transform .34s cubic-bezier(.65,0,.35,1), opacity .2s ease, fill .2s ease; }
 .theme-ray { transition-delay: .045s; }
 .theme-crescent-cutout { opacity: 0; transform: translate(5px,-5px) scale(.6); }
-:root[data-theme="dark"] .theme-core { transform: scale(1.55); }
+:root[data-theme="dark"] .theme-core { transform: scale(1.7); }
 :root[data-theme="dark"] .theme-ray { transform: rotate(45deg) scale(0); transition-delay: 0s; }
-:root[data-theme="dark"] .theme-crescent-cutout { opacity: 1; transform: translate(-4px,4px) scale(1); transition-delay: .045s; }
+:root[data-theme="dark"] .theme-crescent-cutout { opacity: 1; transform: translate(-3px,2px) scale(1); transition-delay: .045s; }
 
 @property --reveal-progress { syntax: "<length>"; inherits: false; initial-value: 0px; }
 @media (prefers-reduced-motion: no-preference) {

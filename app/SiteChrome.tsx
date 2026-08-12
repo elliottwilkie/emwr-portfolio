@@ -99,7 +99,7 @@ export function ThemeToggle() {
       <svg className="theme-icon" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
         <g stroke="currentColor" strokeLinecap="round">
           <circle className="theme-core" cx="12" cy="12" r="5" fill="currentColor" />
-          <circle className="theme-crescent-cutout" cx="20" cy="7" r="6.4" fill="var(--paper)" stroke="none" />
+          <circle className="theme-crescent-cutout" cx="20" cy="7" r="6.2" fill="var(--paper)" stroke="none" />
           {["M12 1.4v2.4", "m20.3 3.7-2.5 2.5", "M22.6 12h-2.4", "M12 22.6v-2.4", "M1.4 12h2.4", "m20.3 20.3-2.5-2.5", "m3.7 20.3 2.5-2.5", "m3.7 3.7 2.5 2.5"].map((path) => <path className="theme-ray" key={path} d={path} fill="none" strokeWidth="2" strokeLinejoin="round" />)}
         </g>
       </svg>
