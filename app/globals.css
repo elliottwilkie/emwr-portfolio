@@ -380,7 +380,7 @@ body:has(.project-modal-layer) .theme-toggle { opacity: 0; pointer-events: none;
   .project-slash { flex: 0 0 auto; }
   .project-detail { min-width: 0; flex: 1 1 auto; overflow: hidden; text-overflow: ellipsis; }
   .project-arrow { display: none; }
-  .project-row { font-size: clamp(12px, 3.55vw, 14px); }
+  .project-row { font-size: 14px; }
   .playground-shell { display: block; width: calc(100% - 64px); margin: 80px auto 24px; }
   .playground { display: block; }
   .home-playground-column > .time-footer { margin-top: 0; }
