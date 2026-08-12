@@ -128,7 +128,18 @@ export function ThemeToggle() {
 export function HomePill({ onReturn, overlay = false }: { onReturn?: () => void; overlay?: boolean } = {}) {
   return (
     <>
-      <span className={`home-pill-glass ${overlay ? "project-overlay-home-glass" : ""}`} aria-hidden="true" />
+      <span className={`home-pill-glass ${overlay ? "project-overlay-home-glass" : ""}`} aria-hidden="true">
+        <svg className="home-pill-glass-filter" width="0" height="0">
+          <filter id="return-glass-warp" x="-12%" y="-18%" width="124%" height="136%" colorInterpolationFilters="sRGB">
+            <feTurbulence type="fractalNoise" baseFrequency="0.009 0.028" numOctaves="2" seed="7" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="18" xChannelSelector="R" yChannelSelector="B" />
+          </filter>
+        </svg>
+        <i className="home-pill-glass-band glass-band-one" />
+        <i className="home-pill-glass-band glass-band-two" />
+        <i className="home-pill-glass-band glass-band-three" />
+        <i className="home-pill-glass-band glass-band-four" />
+      </span>
       <a
         className={`home-pill ${overlay ? "project-overlay-home" : ""}`}
         href="/"

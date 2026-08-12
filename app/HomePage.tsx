@@ -426,7 +426,7 @@ export function HomePage() {
         </span>
         <h1 id="intro-title">Elliott Wilkie-Roşca</h1>
         <p>
-          Designer with 12+ years of experience making products <em className="feel-word">feel</em> simple. I've helped startups and global brands simplify complex products across healthcare, AI, e-commerce, and emerging technology.
+          Designer with 12+ years of experience making products <em className="feel-word">feel</em> simple. I've helped startups and global brands simplify complex products across healthcare, AI, <span className="keep-together">e-commerce</span>, and emerging technology.
           <span> Currently, I'm an associate director of experience design at Boldscience.</span>
         </p>
       </section>

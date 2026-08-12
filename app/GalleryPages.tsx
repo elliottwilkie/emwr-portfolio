@@ -10,7 +10,7 @@ export function ArtGalleryPage({ embedded = false }: { embedded?: boolean }) {
     <Wrapper className={`detail-page gallery-page ${embedded ? "gallery-page-embedded" : ""}`}>
       <header className="gallery-intro">
         <h1>Art and illustration</h1>
-        <p>I&apos;ve been drawing since I could hold a pencil, now it&apos;s a life-long hobby. My claim to fame is that Mads Mikkelsen shared my portrait of him (yay).</p>
+        <p>I&apos;ve been drawing since I could hold a pencil, now it&apos;s a <span className="keep-together">life-long</span> hobby. My claim to fame is that Mads Mikkelsen shared my portrait of him (yay).</p>
       </header>
       <div className="two-column-gallery art-grid">
         <div className="art-column">
