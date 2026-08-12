@@ -147,7 +147,7 @@ export function HomePage() {
   }, []);
 
   useEffect(() => {
-    const updateScale = () => setPlaygroundScale(Math.min(1, Math.max(0.4, (document.documentElement.clientWidth - 48) / 640)));
+    const updateScale = () => setPlaygroundScale(Math.min(1, Math.max(0.4, (document.documentElement.clientWidth - 64) / 640)));
     const frame = window.requestAnimationFrame(updateScale);
     window.addEventListener("resize", updateScale);
     return () => {
