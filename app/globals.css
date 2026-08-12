@@ -114,13 +114,13 @@ a { color: inherit; }
 .home-links > h2 + .simple-row { margin-top: 11px; }
 .home-links:has(.simple-row:focus-visible) .simple-row:not(:focus-visible) { opacity: .5; }
 
-.playground-shell { position: relative; width: 700px; margin: 96px auto 24.5px; overflow: visible; }
-.playground { position: absolute; left: 50%; top: 0; width: 700px; height: 500px; transform: translateX(-50%) scale(var(--playground-scale, 1)); transform-origin: top center; }
+.playground-shell { position: relative; width: 740px; margin: 96px auto 24.5px; overflow: visible; }
+.playground { position: absolute; left: 50%; top: 0; width: 740px; height: 520px; transform: translateX(-50%) scale(var(--playground-scale, 1)); transform-origin: top center; }
 .collage-object { --base-rotation: 0deg; --hover-rotation: 0deg; position: absolute; translate: var(--drag-x, 0) var(--drag-y, 0); transform: rotate(calc(var(--base-rotation) + var(--hover-rotation))); user-select: none; z-index: 1; cursor: pointer; touch-action: none; transition: transform .24s cubic-bezier(.2,0,0,1), filter .18s ease, box-shadow .18s ease; }
 .collage-object > * { cursor: inherit; }
 .collage-object.is-dragging { cursor: grabbing; filter: drop-shadow(0 12px 12px rgba(0,0,0,.15)); }
 .collage-object > img, .collage-object .photo-stack > img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
-.drag-music { --base-rotation: -5deg; left: 20px; top: 94px; z-index: 5; }
+.drag-music { --base-rotation: -5deg; left: 15px; top: 94px; z-index: 5; }
 .music-card { display: flex; align-items: center; gap: 4px; width: 220px; height: 88px; padding: 4px; border: .5px solid var(--hairline); border-radius: 44px 8px 8px 44px; background: var(--surface); box-shadow: 0 .6px .6px -1.25px rgba(0,0,0,.18),0 2.3px 2.3px -2.5px rgba(0,0,0,.16),0 10px 10px -3.75px rgba(0,0,0,.06),0 .5px 2px rgba(0,0,0,.25); text-align: left; text-decoration: none; }
 .record-art { position: relative; width: 80px; height: 80px; flex: 0 0 auto; overflow: hidden; border: .75px solid rgba(22,22,22,.48); border-radius: 50%; background: #080908; box-shadow: inset 0 0 0 1px rgba(255,255,255,.12), 0 .6px .6px -1.25px rgba(0,0,0,.58),0 2.3px 2.3px -2.5px rgba(0,0,0,.51),0 10px 10px -3.75px rgba(0,0,0,.2); }
 .record-disc { position: absolute; inset: 1px; overflow: hidden; border-radius: 50%; background: #090a09; animation: vinyl-spin 8s linear infinite; }
@@ -138,29 +138,29 @@ a { color: inherit; }
 .music-divider { display: block; height: 1px; margin: 4px 0 2px; background: rgba(22,22,22,.08); }
 .music-copy em { display: flex; gap: 4px; color: var(--muted); font-size: 10px; line-height: 16px; font-style: normal; letter-spacing: -.1px; font-feature-settings: "cv01" 1, "cv02" 1, "cv03" 1, "cv04" 1, "cv05" 1, "cv09" 1, "cv11" 1, "ss09" 1, "zero" 1; white-space: nowrap; opacity: .82; }
 .music-copy b { font-weight: var(--type-regular-weight); }
-.drag-drawing { --base-rotation: 7deg; left: 214px; top: 137px; width: 58px; height: 56px; z-index: 6; }
+.drag-drawing { --base-rotation: 7deg; left: 230px; top: 137px; width: 58px; height: 56px; z-index: 6; }
 :root[data-theme="dark"] .drag-drawing > img { filter: invert(1) brightness(1.16); }
 .cat-doodle { padding: 0; border: 0; background: transparent; transition: left .52s cubic-bezier(.2,.85,.25,1), top .52s cubic-bezier(.2,.85,.25,1), transform .24s cubic-bezier(.2,0,0,1), filter .18s ease; }
 .cat-doodle.is-escaping { animation: cat-escape .52s cubic-bezier(.2,.85,.25,1); }
 @keyframes cat-escape { 0% { transform: rotate(var(--base-rotation)) translateY(0) scale(1); } 38% { transform: rotate(calc(var(--base-rotation) + 8deg)) translateY(-18px) scale(1.08); } 100% { transform: rotate(var(--base-rotation)) translateY(0) scale(1); } }
-.drag-main-photo { --base-rotation: 1deg; left: 247px; top: 34px; width: 205px; height: 271px; z-index: 2; }
+.drag-main-photo { --base-rotation: 1deg; left: 270px; top: 30px; width: 205px; height: 271px; z-index: 2; }
 .photo-stack { width: 100%; height: 100%; padding: 0; border: 6px solid var(--photo-frame); border-radius: 14px; background: var(--photo-frame); box-shadow: 0 0 0 1px rgba(15,13,11,.07), 0 3px 10px rgba(0,0,0,.08); overflow: hidden; }
 .photo-stack img { border-radius: 8px; }
-.drag-friends { --base-rotation: -9deg; left: 78px; top: 218px; width: 158px; height: 132px; border: 5px solid var(--photo-frame); border-radius: 8px; box-shadow: 0 3px 8px rgba(0,0,0,.15); overflow: hidden; z-index: 3; }
-.drag-figma { --base-rotation: -1deg; left: 560px; top: 35px; width: 38px; height: 48px; z-index: 4; }
+.drag-friends { --base-rotation: -9deg; left: 80px; top: 230px; width: 158px; height: 132px; border: 5px solid var(--photo-frame); border-radius: 8px; box-shadow: 0 3px 8px rgba(0,0,0,.15); overflow: hidden; z-index: 3; }
+.drag-figma { --base-rotation: -1deg; left: 590px; top: 30px; width: 38px; height: 48px; z-index: 4; }
 .drag-figma > img { object-fit: contain; }
-.drag-spark { --base-rotation: 10deg; left: 642px; top: 116px; width: 32px; height: 32px; z-index: 5; }
-.drag-devils { --base-rotation: -5deg; left: 18px; top: 358px; width: 98px; height: 77px; z-index: 2; }
-.drag-halloween { --base-rotation: 6deg; left: 153px; top: 350px; width: 92px; height: 120px; border-radius: 3px; z-index: 5; }
+.drag-spark { --base-rotation: 10deg; left: 680px; top: 120px; width: 32px; height: 32px; z-index: 5; }
+.drag-devils { --base-rotation: -5deg; left: 18px; top: 380px; width: 98px; height: 77px; z-index: 2; }
+.drag-halloween { --base-rotation: 6deg; left: 156px; top: 380px; width: 92px; height: 120px; border-radius: 3px; z-index: 5; }
 .movie-card { overflow: visible; cursor: pointer; }
 .spooky-cover-image { width: 92px; height: 120px; object-fit: contain; filter: drop-shadow(0 3px 3px rgba(0,0,0,.2)); }
 .movie-ghost-layer { position: absolute; inset: 0; z-index: 4; overflow: visible; pointer-events: none; }
 .movie-ghost { position: absolute; bottom: 86px; width: 22px; height: 26px; pointer-events: none; animation: movie-ghost-rise 2.4s ease-out forwards; }
 @keyframes movie-ghost-rise { 0% { opacity: 0; transform: translateY(0) scale(.9); } 15% { opacity: 1; } 70% { opacity: 1; } 100% { opacity: 0; transform: translateY(-70px) scale(.8); } }
-.drag-run { --base-rotation: -3deg; left: 310px; top: 334px; width: 124px; height: 124px; border-radius: 8px; overflow: hidden; z-index: 3; }
-.drag-sketch-video { --base-rotation: 4deg; box-sizing: border-box; left: 464px; top: 332px; width: 124px; height: 165px; padding: 5px; border-radius: 9px; background: var(--photo-frame); box-shadow: 0 3px 9px rgba(0,0,0,.14); overflow: hidden; z-index: 4; }
+.drag-run { --base-rotation: -3deg; left: 322px; top: 360px; width: 124px; height: 124px; border-radius: 8px; overflow: hidden; z-index: 3; }
+.drag-sketch-video { --base-rotation: 4deg; box-sizing: border-box; left: 476px; top: 348px; width: 124px; height: 165px; padding: 5px; border-radius: 9px; background: var(--photo-frame); box-shadow: 0 3px 9px rgba(0,0,0,.14); overflow: hidden; z-index: 4; }
 .drag-sketch-video video { display: block; width: 100%; height: 100%; border-radius: 5px; object-fit: cover; pointer-events: none; }
-.drag-wallpaper { --base-rotation: -1deg; left: 513px; top: 80px; width: 175px; height: 270px; z-index: 3; }
+.drag-wallpaper { --base-rotation: -1deg; left: 553px; top: 82px; width: 175px; height: 270px; z-index: 3; }
 .drag-wallpaper > img { height: 218px; object-fit: fill; border-radius: 14px; transform: rotate(5deg); box-shadow: 0 3px 9px rgba(0,0,0,.13); }
 .drag-wallpaper > span { position: absolute; left: 0; top: 226px; width: 172px; color: var(--body); font-family: "Reenie Beanie", sans-serif; font-size: 20px; line-height: 16px; letter-spacing: -.6px; font-feature-settings: normal; font-variation-settings: normal; text-align: center; transform: rotate(4deg); }
 

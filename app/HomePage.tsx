@@ -110,7 +110,7 @@ function HalloweenHover() {
 
 function EscapingCat() {
   const cat = useRef<HTMLButtonElement>(null);
-  const position = useRef({ x: 214, y: 137 });
+  const position = useRef({ x: 230, y: 137 });
 
   const escape = () => {
     const element = cat.current;
@@ -119,8 +119,8 @@ function EscapingCat() {
     let next = position.current;
     for (let attempt = 0; attempt < 12; attempt += 1) {
       const candidate = {
-        x: 24 + Math.random() * (700 - 58 - 48),
-        y: 24 + Math.random() * (500 - 56 - 48),
+        x: 24 + Math.random() * (740 - 58 - 48),
+        y: 24 + Math.random() * (520 - 56 - 48),
       };
       next = candidate;
       if (Math.hypot(candidate.x - position.current.x, candidate.y - position.current.y) > 150) break;
@@ -189,7 +189,7 @@ export function HomePage() {
   }, []);
 
   useEffect(() => {
-    const updateScale = () => setPlaygroundScale(Math.min(1, Math.max(0.4, (document.documentElement.clientWidth - 64) / 700)));
+    const updateScale = () => setPlaygroundScale(Math.min(1, Math.max(0.4, (document.documentElement.clientWidth - 64) / 740)));
     const frame = window.requestAnimationFrame(updateScale);
     window.addEventListener("resize", updateScale);
     return () => {
@@ -552,7 +552,7 @@ export function HomePage() {
       </section>
 
       <div className="home-playground-column home-reveal reveal-playground">
-        <section className="playground-shell" style={{ "--playground-scale": playgroundScale, height: `${500 * playgroundScale}px` } as CSSProperties} aria-label="Personal objects">
+        <section className="playground-shell" style={{ "--playground-scale": playgroundScale, height: `${520 * playgroundScale}px` } as CSSProperties} aria-label="Personal objects">
           <div className="playground" ref={playground}>
             <div className="collage-object drag-music"><RecentlyPlayed /></div>
             <EscapingCat />
